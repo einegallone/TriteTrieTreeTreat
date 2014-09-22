@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.Stack;
 
 /**
- * This data type utilizes hashmaps to link its branches as opposed to arrays
- * with fixed sizes (namely one with 256 elements for each character of the
- * extended ASCII).
+ * This generic data type utilizes hashmaps to link its branches as opposed to
+ * arrays with fixed sizes (namely one with 256 elements for each character of
+ * the extended ASCII).
  */
 public class TrieTree<Value>
 {
@@ -106,18 +106,28 @@ public class TrieTree<Value>
         rootNode = new Node();
     }
 
+    /**
+     * This method returns the number of keys in the tree.
+     * 
+     * @return Number of keys in the tree.
+     */
     public long size()
     {
         return sizeOfTrie;
     }
 
+    /**
+     * This method reports whether the tree is empty.
+     * 
+     * @return True if the true is empty. False otherwise.
+     */
     public boolean isEmpty()
     {
         return sizeOfTrie == 0;
     }
 
     /**
-     * This method gets the value associated with the key, if the key exists in
+     * This method gets the Value associated with the key, if the key exists in
      * the tree.
      * 
      * @param key
@@ -192,7 +202,7 @@ public class TrieTree<Value>
     }
 
     /**
-     * This method puts a string into the trie and associates a value with the
+     * This method puts a string into the trie and associates a Value with the
      * string. Duplicates will not be added.
      * 
      * @param key
@@ -249,7 +259,7 @@ public class TrieTree<Value>
     }
 
     /**
-     * This method updates the value associated with the key.
+     * This method updates the Value associated with the key.
      * 
      * @param key
      *            String of the key.
