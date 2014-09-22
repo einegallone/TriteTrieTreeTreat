@@ -473,7 +473,7 @@ public class TrieTree<Value>
      * This method returns an iterable collection of strings of all keys in the
      * trie tree.
      * 
-     * @return Iterable collection of strings of all keys in the trie tree.
+     * @return Iterable collection of Strings of all keys in the trie tree.
      */
     public Iterable<String> allKeys()
     {
