@@ -1,7 +1,7 @@
 TriteTrieTreeTreat
 =================
 
-Generic trie tree data structure that utilizes hashmaps to link its branches, where data associated with the key is Value.
+Generic prefix trie tree data structure that utilizes hashmaps to link its branches. Each key is represented by a String and is associated with a Value. Each character of the key String is a node and only the nodes that represent the ends of keys have Values associated with them.
 
 Version 0.0.1
 ===========

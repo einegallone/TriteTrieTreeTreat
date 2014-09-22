@@ -6,9 +6,10 @@ import java.util.Set;
 import java.util.Stack;
 
 /**
- * This generic data type utilizes hashmaps to link its branches as opposed to
- * arrays with fixed sizes (namely one with 256 elements for each character of
- * the extended ASCII).
+ * This generic data type is a prefix trie tree that utilizes hashmaps to link
+ * its branches. Each key is represented by a String and is associated with a
+ * Value. Each character of the key String is a node and only the nodes that
+ * represent the ends of keys have Values associated with them.
  */
 public class TrieTree<Value>
 {
@@ -27,7 +28,8 @@ public class TrieTree<Value>
                                      // be removed. Cannot go below 0.
         HashMap<Character, Node> childrenNodes; // Link branches via maps.
                                                 // Alternatively, we could use a
-                                                // 256-element array.
+                                                // 256-element array for the
+                                                // extended ASCII character map.
 
         public Node()
         {
