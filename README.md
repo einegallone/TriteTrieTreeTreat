@@ -3,7 +3,7 @@ TriteTrieTreeTreat
 
 Generic prefix trie tree data structure that utilizes hashmaps to link its branches. Each key is represented by a String and is associated with a Value. Each character of the key String is a node and only the nodes that represent the ends of keys have Values associated with them.
 
-Version 0.0.1
+Version 1.0.0
 ===========
 Public methods:
 
@@ -55,18 +55,18 @@ This method removes a key from the tree, if it exists.
         String of the key.
     @return
         True if the key is removed. False if the key is not in the tree.
+        
+8. boolean removeAll()
+This method clears the entire tree.
 
-8. Iterable<String> keysWithPrefix(String prefix)
+9. Iterable<String> keysWithPrefix(String prefix)
 This method returns a collection of keys from the tree that contain the prefix input.
     @param prefix
         String of the prefix.
     @return
         Iterable collection of Strings of the keys.
 
-9. Iterable<String> allKeys()
+10. Iterable<String> allKeys()
 This method returns an iterable collection of strings of all keys in the trie tree.
     @return
         Iterable collection of Strings of all keys in the trie tree.
-
-TODO:
-- Unit tests. Probably JUnit.

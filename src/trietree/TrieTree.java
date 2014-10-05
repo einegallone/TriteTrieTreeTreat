@@ -139,7 +139,7 @@ public class TrieTree<Value>
      */
     public Value get(String key)
     {
-        if (key.isEmpty() || isEmpty())
+        if (key == null || key.isEmpty() || isEmpty())
             return null;
 
         Node n = get(key, rootNode, false);
@@ -197,7 +197,7 @@ public class TrieTree<Value>
      */
     public boolean contains(String key)
     {
-        if (key.isEmpty() || isEmpty())
+        if (key == null || key.isEmpty() || isEmpty())
             return false;
 
         return get(key, rootNode, false) != null;
@@ -216,7 +216,7 @@ public class TrieTree<Value>
      */
     public boolean put(String key, Value val)
     {
-        if (key.isEmpty() || contains(key))
+        if (key == null || key.isEmpty() || contains(key))
             return false;
 
         return put(key, val, rootNode);
@@ -272,7 +272,7 @@ public class TrieTree<Value>
      */
     public boolean update(String key, Value val)
     {
-        if (key.isEmpty() || isEmpty())
+        if (key == null|| key.isEmpty() || isEmpty())
             return false;
 
         return update(key, val, rootNode);
@@ -328,7 +328,7 @@ public class TrieTree<Value>
      */
     public boolean remove(String key)
     {
-        if (key.isEmpty() || isEmpty())
+        if (key == null || key.isEmpty() || isEmpty())
             return false;
 
         // We will add <parentNode, char> pairs that are to be removed from
@@ -413,6 +413,15 @@ public class TrieTree<Value>
         return remove(key.substring(1), child, keyCharacters);
     }
 
+    /**
+     * This method clears the entire tree.
+     */
+    public void removeAll()
+    {
+        rootNode.childrenNodes.clear();
+        sizeOfTrie = 0;
+    }
+    
     /**
      * This method returns a collection of keys from the tree that contain the
      * prefix input.
