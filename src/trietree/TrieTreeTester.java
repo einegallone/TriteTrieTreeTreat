@@ -16,7 +16,7 @@ public class TrieTreeTester
 
         assertEquals("Empty tree has 0 entries", 0, tt_integer.size());
         assertTrue("Empty tree returns true", tt_integer.isEmpty());
-        assertEquals("Empty tree has no entries", Collections.emptyMap(), tt_integer.allKeys());
+        assertEquals("Empty tree has no entries", Collections.emptyMap(), tt_integer.allKeyValues());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class TrieTreeTester
         assertEquals("Tree has 3 entries after putting 3 unique keys", 3, tt_integer.size());
         assertFalse("Tree is not empty after putting 3 unique keys", tt_integer.isEmpty());
         assertTrue("Tree has \"cat\", \"dog\", and \"mouse\" after put",
-                   hm_expected.equals(tt_integer.allKeys()));
+                   hm_expected.equals(tt_integer.allKeyValues()));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class TrieTreeTester
         assertTrue("Remove \"dogged\" returns true", tt_integer.remove("dogged"));
         assertEquals("Tree has 2 entries left", 2, tt_integer.size());
         assertTrue("Tree has \"dog\" and \"mouse\" after left",
-                   hm_expected.equals(tt_integer.allKeys()));
+                   hm_expected.equals(tt_integer.allKeyValues()));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class TrieTreeTester
         tt_integer.removeAll();
         assertEquals("Empty tree has 0 entries", 0, tt_integer.size());
         assertTrue("Empty tree returns true", tt_integer.isEmpty());
-        assertTrue("Empty tree has no entries", hm_expected.equals(tt_integer.allKeys()));
+        assertTrue("Empty tree has no entries", hm_expected.equals(tt_integer.allKeyValues()));
     }
 
     @Test
@@ -135,9 +135,9 @@ public class TrieTreeTester
         TrieTree<Integer> tt_integer = new TrieTree<Integer>();
 
         assertEquals("Empty tree has nothing with prefix \"\"", Collections.emptyMap(),
-                     tt_integer.keysWithPrefix(""));
+                     tt_integer.keyValueCollectionWithPrefix(""));
         assertEquals("Empty tree has nothing with prefix \"\"", Collections.emptyMap(),
-                     tt_integer.keysWithPrefix(null));
+                     tt_integer.keyValueCollectionWithPrefix(null));
 
         tt_integer.put("cat", 1);
         tt_integer.put("catastrophe", 2);
@@ -153,38 +153,38 @@ public class TrieTreeTester
         hm_expected1.put("catacomb", 5);
         hm_expected1.put("catastrophe", 2);
         assertTrue("Prefix 'cata' has \"catacomb\" and \"catastrophe\"",
-                   hm_expected1.equals(tt_integer.keysWithPrefix("cata")));
+                   hm_expected1.equals(tt_integer.keyValueCollectionWithPrefix("cata")));
 
         hm_expected1.put("cat", 1);
         hm_expected1.put("cats", 3);
         hm_expected1.put("catnap", 4);
         assertTrue("Prefix 'cat' has \"cat\", \"catastrophe\", \"cats\", \"catnap\", and \"catacomb\"",
-                   hm_expected1.equals(tt_integer.keysWithPrefix("cat")));
+                   hm_expected1.equals(tt_integer.keyValueCollectionWithPrefix("cat")));
 
         hm_expected1.put("ca", 6);
         hm_expected1.put("c", 7);
         assertTrue("Prefix 'c' has \"cat\", \"catastrophe\", \"cats\", \"catnap\", \"catacomb\", \"ca\", and \"c\"",
-                   hm_expected1.equals(tt_integer.keysWithPrefix("c")));
+                   hm_expected1.equals(tt_integer.keyValueCollectionWithPrefix("c")));
 
         HashMap<String, Integer> hm_expected2 = new HashMap<String, Integer>();
         hm_expected2.put("dog", 8);
         hm_expected2.put("dogged", 9);
         assertTrue("Prefix 'd' has \"dog\" and \"dogged\"",
-                   hm_expected2.equals(tt_integer.keysWithPrefix("d")));
+                   hm_expected2.equals(tt_integer.keyValueCollectionWithPrefix("d")));
 
-        assertEquals("Prefix 'z' has no matches", Collections.emptyMap(), tt_integer.keysWithPrefix("z"));
+        assertEquals("Prefix 'z' has no matches", Collections.emptyMap(), tt_integer.keyValueCollectionWithPrefix("z"));
 
         hm_expected1.put("dog", 8);
         hm_expected1.put("dogged", 9);
         assertTrue("Prefix \"\" has \"cat\", \"catastrophe\", \"cats\", \"catnap\", \"catacomb\", \"ca\", \"c\", \"dog\", and \"dogged\"",
-                   hm_expected1.equals(tt_integer.keysWithPrefix("")));
+                   hm_expected1.equals(tt_integer.keyValueCollectionWithPrefix("")));
     }
 
     @Test
     public void testAllKeys()
     {
         TrieTree<Integer> tt_integer = new TrieTree<Integer>();
-        assertEquals("Empty tree has nothing", Collections.emptyMap(), tt_integer.allKeys());
+        assertEquals("Empty tree has nothing", Collections.emptyMap(), tt_integer.allKeyValues());
 
         tt_integer.put("cat", 1);
         tt_integer.put("catastrophe", 2);
@@ -207,6 +207,6 @@ public class TrieTreeTester
         hm_expected.put("dog", 8);
         hm_expected.put("dogged", 9);
         assertTrue("All keys: \"cat\", \"catastrophe\", \"cats\", \"catnap\", \"catacomb\", \"ca\", \"c\", \"dog\", and \"dogged\"",
-                   hm_expected.equals(tt_integer.allKeys()));
+                   hm_expected.equals(tt_integer.allKeyValues()));
     }
 }

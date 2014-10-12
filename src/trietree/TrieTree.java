@@ -431,7 +431,7 @@ public class TrieTree<Value>
      * @return HashMap<String, Value> collection of all entries that match the
      *         prefix in the trie tree.
      */
-    public HashMap<String, Value> keysWithPrefix(String prefix)
+    public HashMap<String, Value> keyValueCollectionWithPrefix(String prefix)
     {
         HashMap<String, Value> keyCollection = new HashMap<String, Value>();
 
@@ -448,7 +448,7 @@ public class TrieTree<Value>
                 return keyCollection;
         }
 
-        addToKVCPrefixCollection(new StringBuilder(prefix), n, keyCollection);
+        addToKVPrefixCollection(new StringBuilder(prefix), n, keyCollection);
         return keyCollection;
     }
 
@@ -464,7 +464,7 @@ public class TrieTree<Value>
      *            HashMap<String, Value> that contains all keys and values that
      *            match the prefix.
      */
-    private void addToKVCPrefixCollection(StringBuilder prefix, Node parentNode,
+    private void addToKVPrefixCollection(StringBuilder prefix, Node parentNode,
         HashMap<String, Value> keyCollection)
     {
         // If this prefix is a word, add the key/value to the collection.
@@ -479,7 +479,7 @@ public class TrieTree<Value>
             prefix.append(child.getKey());
             // Not performing tail recursion may result in stack overflow if
             // the trie tree is extremely large and sparse.
-            addToKVCPrefixCollection(prefix, child.getValue(), keyCollection);
+            addToKVPrefixCollection(prefix, child.getValue(), keyCollection);
             prefix.deleteCharAt(prefix.length() - 1);
         }
     }
@@ -491,8 +491,8 @@ public class TrieTree<Value>
      * @return HashMap<String, Value> collection of all entries in the trie
      *         tree.
      */
-    public HashMap<String, Value> allKeys()
+    public HashMap<String, Value> allKeyValues()
     {
-        return keysWithPrefix("");
+        return keyValueCollectionWithPrefix("");
     }
 }

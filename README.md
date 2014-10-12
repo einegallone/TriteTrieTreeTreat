@@ -58,14 +58,14 @@ This method removes a key from the tree, if it exists.
 8. boolean removeAll()
 This method clears the entire tree.
 
-9. HashMap<String, Value> keysWithPrefix(String prefix)
+9. HashMap<String, Value> keyValueCollectionWithPrefix(String prefix)
 This method returns a HashMap<String, Value> collection that contain the prefix input in the trie tree.
     @param prefix
         String of the prefix.
     @return
         HashMap<String, Value> collection of all entries that match the prefix in the trie tree.
 
-10. HashMap<String, Value> allKeys()
+10. HashMap<String, Value> allKeyValues()
 This method returns a HashMap<String, Value> collection of all entries in the trie tree.
     @return
         HashMap<String, Value> collection of all entries in the trie tree.
