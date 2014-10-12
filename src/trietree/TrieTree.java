@@ -272,7 +272,7 @@ public class TrieTree<Value>
      */
     public boolean update(String key, Value val)
     {
-        if (key == null|| key.isEmpty() || isEmpty())
+        if (key == null || key.isEmpty() || isEmpty())
             return false;
 
         return update(key, val, rootNode);
@@ -316,7 +316,7 @@ public class TrieTree<Value>
         }
 
         // Pass in the rest of the key substring for another cycle.
-        return put(key.substring(1), val, child);
+        return update(key.substring(1), val, child);
     }
 
     /**
@@ -421,18 +421,19 @@ public class TrieTree<Value>
         rootNode.childrenNodes.clear();
         sizeOfTrie = 0;
     }
-    
+
     /**
-     * This method returns a collection of keys from the tree that contain the
-     * prefix input.
+     * This method returns a HashMap<String, Value> collection that contain the
+     * prefix input in the trie tree.
      * 
      * @param prefix
      *            String of the prefix.
-     * @return Iterable collection of Strings of the keys.
+     * @return HashMap<String, Value> collection of all entries that match the
+     *         prefix in the trie tree.
      */
-    public Iterable<String> keysWithPrefix(String prefix)
+    public HashMap<String, Value> keysWithPrefix(String prefix)
     {
-        Stack<String> keyCollection = new Stack<String>();
+        HashMap<String, Value> keyCollection = new HashMap<String, Value>();
 
         // Retrieve node at the end of the prefix, if it exists.
         Node n = new Node();
@@ -447,25 +448,28 @@ public class TrieTree<Value>
                 return keyCollection;
         }
 
-        addToKeyPrefixCollection(new StringBuilder(prefix), n, keyCollection);
+        addToKVCPrefixCollection(new StringBuilder(prefix), n, keyCollection);
         return keyCollection;
     }
 
     /**
-     * This method adds a key that contains the prefix to the collection.
+     * This method adds a <String, Value> pair that contains the prefix to the
+     * key-value collection.
      * 
      * @param prefix
      *            String of the prefix.
      * @param parentNode
      *            Node that contains the current Character.
      * @param keyCollection
-     *            Collection that contains the keys.
+     *            HashMap<String, Value> that contains all keys and values that
+     *            match the prefix.
      */
-    private void addToKeyPrefixCollection(StringBuilder prefix, Node parentNode, Stack<String> keyCollection)
+    private void addToKVCPrefixCollection(StringBuilder prefix, Node parentNode,
+        HashMap<String, Value> keyCollection)
     {
         // If this prefix is a word, add the key/value to the collection.
         if (parentNode.isWordEnd())
-            keyCollection.push(prefix.toString());
+            keyCollection.put(prefix.toString(), parentNode.getValue());
 
         // Acquire the children in the map. Then go through the children,
         // appending the characters to the prefix and pass recursively.
@@ -475,18 +479,19 @@ public class TrieTree<Value>
             prefix.append(child.getKey());
             // Not performing tail recursion may result in stack overflow if
             // the trie tree is extremely large and sparse.
-            addToKeyPrefixCollection(prefix, child.getValue(), keyCollection);
+            addToKVCPrefixCollection(prefix, child.getValue(), keyCollection);
             prefix.deleteCharAt(prefix.length() - 1);
         }
     }
 
     /**
-     * This method returns an iterable collection of strings of all keys in the
-     * trie tree.
+     * This method returns a HashMap<String, Value> collection of all entries in
+     * the trie tree.
      * 
-     * @return Iterable collection of Strings of all keys in the trie tree.
+     * @return HashMap<String, Value> collection of all entries in the trie
+     *         tree.
      */
-    public Iterable<String> allKeys()
+    public HashMap<String, Value> allKeys()
     {
         return keysWithPrefix("");
     }
