@@ -1,5 +1,5 @@
 TriteTrieTreeTreat
-=================
+===========
 Generic prefix trie tree data structure that utilizes hashmaps to link its branches. Each key is represented by a String and is associated with a Value. Each character of the key String is a node and only the nodes that represent the ends of keys have Values associated with them.
 
 Version 1.0.1
@@ -76,3 +76,9 @@ Unit tests cover 100% of the functions and 94.9% of the conditions. All lines ha
 Missing conditions include:
 - asserts for false cases
 - public void Node::decrementRefCount(), where there's a safeguard on referenceCount, preventing it from becoming negative
+
+Frugal Instant - The Poor Man's Google Instant
+===========
+This GUI allows a user to import String Keys and Integer Values to produce autocomplete entries for words or phrases with similar prefixes. The entries are ranked in decreasing order by the Integer Value.
+
+The GUI can accept such data in the form of CSVs where each row consists of "Key\,Value" with "\," as the delimiter. It can also export its data to a CSV with the mentioned format.
