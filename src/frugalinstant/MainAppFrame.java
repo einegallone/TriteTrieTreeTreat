@@ -20,6 +20,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -315,10 +316,14 @@ public class MainAppFrame extends JFrame
                     return;
                 }
 
-                if (populateTree(textFieldFilepathInput.getText(), tt, chckbxOverwriteValues.isSelected()))
-                    lblStatus.setText("Successfully imported data.");
+                long startTime = new Date().getTime();
+                boolean populateTreeStatus = populateTree(textFieldFilepathInput.getText(), tt, chckbxOverwriteValues.isSelected());
+                long endTime = new Date().getTime();
+                
+                if (populateTreeStatus)
+                    lblStatus.setText("Successfully imported data in " + (endTime - startTime) + " ms.");
                 else
-                    lblStatus.setText("Failed to import data.");
+                    lblStatus.setText("Failed to import data in " + (endTime - startTime) + " ms.");
             }
         });
 
@@ -392,9 +397,14 @@ public class MainAppFrame extends JFrame
                     }
                 }
 
-                if (exportTree(file))
-                    lblStatus.setText("Successfully exported data.");
-                return;
+                long startTime = new Date().getTime();
+                boolean exportTreeStatus = exportTree(file);
+                long endTime = new Date().getTime();
+
+                if (exportTreeStatus)
+                    lblStatus.setText("Successfully exported data in " + (endTime - startTime) + " ms.");
+                else
+                    lblStatus.setText("Failed to export data in " + (endTime - startTime) + " ms.");
             }
         });
 

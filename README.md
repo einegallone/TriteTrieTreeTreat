@@ -1,8 +1,8 @@
 TriteTrieTreeTreat
 ===========
-Generic prefix trie tree data structure that utilizes hashmaps to link its branches. Each key is represented by a String and is associated with a Value. Each character of the key String is a node and only the nodes that represent the ends of keys have Values associated with them.
+Thread-safe generic prefix trie tree data structure that utilizes hashmaps to link its branches. Each key is represented by a String and is associated with a Value. Each character of the key String is a node and only the nodes that represent the ends of keys have Values associated with them.
 
-Version 1.0.1
+Version 1.0.2
 ===========
 Public methods:
 
@@ -82,3 +82,10 @@ Frugal Instant - The Poor Man's Google Instant
 This GUI allows a user to import String Keys and Integer Values to produce autocomplete entries for words or phrases with similar prefixes. The entries are ranked in decreasing order by the Integer Value.
 
 The GUI can accept such data in the form of CSVs where each row consists of "Key\,Value" with "\," as the delimiter. It can also export its data to a CSV with the mentioned format.
+
+Included is a sample words.txt that contains 235,886 keys with values (import time for me: 9648ms, export time for me: ). Words from https://raw.github.com/eneko/data-repository/master/data/words.txt
+
+To Do
+===========
+- Improve export time and performance. Probably implement journaling in the future. For huge data, export functionality is atrocious.
+- Improve UI to provide updates during import/export.
