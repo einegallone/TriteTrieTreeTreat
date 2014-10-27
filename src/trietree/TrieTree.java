@@ -22,20 +22,21 @@ public class TrieTree<Value>
     {
         private boolean wordEnd; // True signifies the end of a word.
         private Value value; // Value assigned when wordEnd is true.
-        private long referenceCount; // Number of references on this node (i.e.
-                                     // how many words in the tree have this
-                                     // prefix). If we hit 0, this node should
-                                     // be removed. Cannot go below 0.
-        HashMap<Character, Node> childrenNodes; // Link branches via maps.
-                                                // Alternatively, we could use a
-                                                // 256-element array for the
-                                                // extended ASCII character map.
+        
+        // Number of references on this node (i.e. how many words in the tree
+        // have this prefix). If we hit 0, this node should be removed. Cannot
+        // go below 0.
+        private long referenceCount;
+        
+        // Link branches via maps. Alternatively, we could use a 256-element
+        // array for the extended ASCII character map. Note: HashMap is not
+        // thread safe. We need to ensure calling functions are synchronized.
+        HashMap<Character, Node> childrenNodes;
 
         public Node()
         {
             childrenNodes = new HashMap<Character, Node>();
             wordEnd = false;
-            referenceCount = 0;
             value = null;
         }
 
@@ -104,7 +105,6 @@ public class TrieTree<Value>
     /* METHODS */
     public TrieTree()
     {
-        sizeOfTrie = 0;
         rootNode = new Node();
     }
 
@@ -113,7 +113,7 @@ public class TrieTree<Value>
      * 
      * @return Number of keys in the tree.
      */
-    public long size()
+    public synchronized long size()
     {
         return sizeOfTrie;
     }
@@ -123,7 +123,7 @@ public class TrieTree<Value>
      * 
      * @return True if the true is empty. False otherwise.
      */
-    public boolean isEmpty()
+    public synchronized boolean isEmpty()
     {
         return sizeOfTrie == 0;
     }
@@ -137,7 +137,7 @@ public class TrieTree<Value>
      * @return Value associated with the key. Null if the key does not exist or
      *         no Value associated with key.
      */
-    public Value get(String key)
+    public synchronized Value get(String key)
     {
         if (key == null || key.isEmpty() || isEmpty())
             return null;
@@ -195,7 +195,7 @@ public class TrieTree<Value>
      *            String of the key.
      * @return True if the key is in the trie tree. False if it is not.
      */
-    public boolean contains(String key)
+    public synchronized boolean contains(String key)
     {
         if (key == null || key.isEmpty() || isEmpty())
             return false;
@@ -214,7 +214,7 @@ public class TrieTree<Value>
      * @return True if put was successful. False if the key is empty or trie
      *         already contains key.
      */
-    public boolean put(String key, Value val)
+    public synchronized boolean put(String key, Value val)
     {
         if (key == null || key.isEmpty() || contains(key))
             return false;
@@ -270,7 +270,7 @@ public class TrieTree<Value>
      * @return True if update was successful. False if the key is empty or trie
      *         does not contain key.
      */
-    public boolean update(String key, Value val)
+    public synchronized boolean update(String key, Value val)
     {
         if (key == null || key.isEmpty() || isEmpty())
             return false;
@@ -326,7 +326,7 @@ public class TrieTree<Value>
      *            String of the key.
      * @return True if the key is removed. False if the key is not in the tree.
      */
-    public boolean remove(String key)
+    public synchronized boolean remove(String key)
     {
         if (key == null || key.isEmpty() || isEmpty())
             return false;
@@ -416,7 +416,7 @@ public class TrieTree<Value>
     /**
      * This method clears the entire tree.
      */
-    public void removeAll()
+    public synchronized void removeAll()
     {
         rootNode.childrenNodes.clear();
         sizeOfTrie = 0;
@@ -431,7 +431,7 @@ public class TrieTree<Value>
      * @return HashMap<String, Value> collection of all entries that match the
      *         prefix in the trie tree.
      */
-    public HashMap<String, Value> keyValueCollectionWithPrefix(String prefix)
+    public synchronized HashMap<String, Value> keyValueCollectionWithPrefix(String prefix)
     {
         HashMap<String, Value> keyCollection = new HashMap<String, Value>();
 
@@ -491,7 +491,7 @@ public class TrieTree<Value>
      * @return HashMap<String, Value> collection of all entries in the trie
      *         tree.
      */
-    public HashMap<String, Value> allKeyValues()
+    public synchronized HashMap<String, Value> allKeyValues()
     {
         return keyValueCollectionWithPrefix("");
     }

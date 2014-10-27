@@ -138,12 +138,6 @@ public class MainAppFrame extends JFrame
 
             public void keyReleased(KeyEvent e)
             {
-                // Disable unsafe buttons until thread safety is implemented.
-                // TODO: implement thread safety so we can remove the button
-                // disabling logic.
-                btnImportCSV.setEnabled(false);
-                btnClearTree.setEnabled(false);
-
                 // Empty table.
                 tableEntries.setRowCount(0);
 
@@ -193,10 +187,6 @@ public class MainAppFrame extends JFrame
 
                 // Set the existing table to show the new entries.
                 tableAutocomplete.setModel(tableEntries);
-
-                // Enable buttons
-                btnImportCSV.setEnabled(true);
-                btnClearTree.setEnabled(true);
 
                 return;
             }
